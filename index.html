@@ -1,14 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Today News</title>
-  <link rel="shortcut icon" href="/img/icon.png" type="image/x-icon">
-<link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-  <h1></h1>
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Hello Project#2</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+       <!--  <link href="css/new.css" rel="stylesheet" />
+        <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous"
+      />-->
+   
+		<script src="news.js"></script>
+		<!--<link rel="stylesheet" href="style.css" />-->
+		 
+		 
+	</head>
+	<body>
+		<!-- Here a loader is created which
+			loads till response comes -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container px-5">
+                    <a class="navbar-brand" href="#!">Welcome</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#!">Services</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="row gx-4 gx-lg-5 align-items-md-baseline my-5">
+               
+                
+                <div class="col-lg-7" style="width:500px; margin:0 auto; "> 
+                     <div class="card">
+                         <div class="container">
+                             <h1 class="text-center title">Weather in</h1>
+                             <form class="search-loaction">
+                                 <input
+                                 type="text"
+                                 name="city"
+                                 placeholder="What city?"
+                                 autocomplete="off"
+                                 id="ho"
+                              />  
+                             <button type="submit" onclick="key2();;return false;">Search</button>  
+ 
+                             </form>
+                             <div class="card">
+                                <div class="container">
+          <img src="img/day_image.svg" alt="" class="card-img-top time" />
+       
+                      <h2><i class="fa fa-map-marker"></i> <span id="location"></span></h2>
+                      <h6 id="weather"></h6>
+                      <h4><span id="temp"></span><sup>o</sup>C</h4>
+                      <img id="icon" src="">
+                      <button onClick="window.location.reload();" class="refresh"><i class="fa fa-refresh"></i></button>
+                  </div></div>
+                 </div></div></div></div> 
+		<div class="d-flex justify-content-center">
+			<div class="spinner-border"
+				role="status" id="loading">
+				<span class="sr-only">Loading...</span>
+			</div>
+		</div>
+        <div class="card text-white bg-secondary my-5 py-4 text-center">
+             <label for="search">Search for News: 
+                <input name="search" id="search" value="" placeholder="palceholder" type="search">      <button type="submit" onclick="searchnews();"><i class="fa fa-search"></i></button>          </br>   </br>   
+                 <button class="button button4" onclick="category('business'); "> business</button><button class="button button4" onclick="category('entertainment'); ">entertainment</button><button class="button button4"onclick="category('general'); " > general</button><button class="button button4" onclick="category('health'); ">health</button>
+                 <button class="button button4" onclick="category('science'); "> science</button> <button class="button button4" onclick="category('sports'); "> sports</button><button class="button button4" onclick="category('technology'); ">technology</button>   </div>
+    
+        </div>
+		<!-- table for showing data -->
+		<div class="container mt-5 mb-5" id="hi">
+                        
+
+		</div>
+
+		<table id="employees"></table>
+        <script type="text/javascript">
+            //const url = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${apiKey}&units=metric`;
+          function key2(){
+            
+            let inputVal = document.getElementById('ho').value;
+          if( document.getElementById('ho').value==null){
+            inputVal=s
+          
+          
+          }
+          //  let inputVal = "london";
+          link = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=bf8d15a80c89aa4f4c82ad6cbb3f5ac5`;
+          var request = new XMLHttpRequest();
+          request.open('GET',link,true);
+          request.onload = function(){
+           var obj = JSON.parse(this.response);
+           console.log(obj);
+           
+           document.getElementById('weather').innerHTML = obj.weather[0].description;
+           document.getElementById('location').innerHTML = obj.name;
+           document.getElementById('temp').innerHTML =str(round(obj.main.temp_max - 273.15), 1 );
+           document.getElementById('icon').src = "http://openweathermap.org/img/w/" + obj.weather[0].icon + ".png";
+          
+           if (request.status >= 200 && request.status < 400) {
+           var temp = obj.main.temp;
+           }
+           else{
+            console.log("The city doesn't exist! Kindly check");
+           }
+          }
+          request.send();
+          
+          }
+          
+          
+          
+          var lat;
+          var long;
+          navigator.geolocation.getCurrentPosition(function(position) {
+              let lat = position.coords.latitude;
+              let long = position.coords.longitude;
+           
+              link = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=bf8d15a80c89aa4f4c82ad6cbb3f5ac5`;
+           var request = new XMLHttpRequest();
+          request.open('GET',link,true);
+          request.onload = function(){
+           var obj = JSON.parse(this.response);
+           console.log(obj);
+           
+           document.getElementById('weather').innerHTML = obj.weather[0].description;
+           document.getElementById('location').innerHTML = obj.name;
+           document.getElementById('temp').innerHTML = obj.main.temp - 273.15;
+           document.getElementById('icon').src = "http://openweathermap.org/img/w/" + obj.weather[0].icon + ".png";
+           
+          
+           if (request.status >= 200 && request.status < 400) {
+           var temp = obj.main.temp;
+           }
+           else{
+            console.log("The city doesn't exist! Kindly check");
+           }
+          }
+          request.send();
+          
+            });
+           
+           
+          //link = `https://api.openweathermap.org/data/2.5/weather?q=${fetchLocationName}&appid=bf8d15a80c89aa4f4c82ad6cbb3f5ac5`;
+          
+          
+          </script>
+
+
+
+           <script  type="text/javascript">
+	  function category(cat) {
+          var category1=cat;
+          const key='9832ecfdecb64916a515132f5fb04164';
+      
+		//document.getElementById('hi').innerHTML = '<div class="d-flex justify-content-center row">'+t+'</div>';
+//var api_url='https://newsapi.org/v2/top-headlines/sources?category=business&apiKey=9832ecfdecb64916a515132f5fb04164';
+//var api_url = 'https://newsapi.org/v2/top-headlines/sources?' +
+  //    'ccategory=health'+
+    //     'sortBy=popularity&' +
+      //  `apiKey=${key}`;
+      var api_url = 'https://newsapi.org/v2/top-headlines?category='+category1+'&'+`apiKey=${key}`
+async function getapi(url) {
+	
+	// Storing response
+	const response = await fetch(url);
+	
+	// Storing data in form of JSON
+	var data = await response.json();
+	console.log(data.articles);
+	if (response) {
+		hideloader();
+	}
+	show(data.articles);
+}
+
+ 
+// Calling that async function
+getapi(api_url);
+function show(data) {
+	let tab =
+		`<tr>
+		<th>source</th>
+		<th>name</th>
+		<th>author</th>
+		<th>url</th>
+		<th>urlToImage</th>
+		<th>publishedAt</th>
+		<th>content</th>
+		</tr>`;
+	
+	// Loop to access all rows
+	for (let r of data) {
+		tab += `<tr>
+	<td>${r.source} </td>
+	<td>${r.name}</td>
+	<td>${r.author}</td>
+	<td>${r.url}</td>		
+	<td>${r.urlToImage}</td>	
+	<td>${r.publishedAt}</td>	
+	<td>${r.content}</td>	
+
+</tr>`;
+	}
+	// Setting innerHTML as tab variable
+	//document.getElementById("employees").innerHTML = tab;
+
+
+
+
+
+	document.getElementById('hi').innerHTML = data.map(r => 
+		` <div class="d-flex justify-content-center row">
+		<div class="col-md-10" >
+		</div><div class="row p-2 bg-white border rounded">
+		<div class="col-md-3 mt-1" ><img class="img-fluid img-responsive rounded product-image"   src="${r.urlToImage}"></div>
+	   
+		  <div class="col-md-6 mt-1"> <h5>  ${r.source.name}</h5> 
+		  <div class="mt-1 mb-1 spec-1"><span> ${r.content}</span></div> 
+		  </div>
+		  <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+		  <a href=${r.url} target="_blank"> Read more</a>
+		   	</div>  </div>
+		</div> <br>`
+	  ).join('')
+	   
+
+
+     
+
+}
+
+
+
+
+
+
+	}
+
+    function searchnews(){
+
+        let keyword = document.getElementById('search').value;
+           const key='9832ecfdecb64916a515132f5fb04164';
+      
+		//document.getElementById('hi').innerHTML = '<div class="d-flex justify-content-center row">'+t+'</div>';
+//var api_url='https://newsapi.org/v2/top-headlines/sources?category=business&apiKey=9832ecfdecb64916a515132f5fb04164';
+//var api_url = 'https://newsapi.org/v2/top-headlines/sources?' +
+  //    'ccategory=health'+
+    //     'sortBy=popularity&' +
+      //  `apiKey=${key}`;
+      var api_url = 'https://newsapi.org/v2/everything?' +
+         'q='+keyword+'&' +
+         'from=2021-12-20&' +
+          'sortBy=popularity&' +
+        `apiKey=${key}`;
+async function getapi(url) {
+	
+	// Storing response
+	const response = await fetch(url);
+	
+	// Storing data in form of JSON
+	var data = await response.json();
+	console.log(data.articles);
+	if (response) {
+		hideloader();
+	}
+	show(data.articles);
+}
+
+ 
+// Calling that async function
+getapi(api_url);
+function show(data) {
+	let tab =
+		`<tr>
+		<th>source</th>
+		<th>name</th>
+		<th>author</th>
+		<th>url</th>
+		<th>urlToImage</th>
+		<th>publishedAt</th>
+		<th>content</th>
+		</tr>`;
+	
+	// Loop to access all rows
+	for (let r of data) {
+		tab += `<tr>
+	<td>${r.source} </td>
+	<td>${r.name}</td>
+	<td>${r.author}</td>
+	<td>${r.url}</td>		
+	<td>${r.urlToImage}</td>	
+	<td>${r.publishedAt}</td>	
+	<td>${r.content}</td>	
+
+</tr>`;
+	}
+	// Setting innerHTML as tab variable
+	//document.getElementById("employees").innerHTML = tab;
+
+
+
+
+
+	document.getElementById('hi').innerHTML = data.map(r => 
+		` <div class="d-flex justify-content-center row">
+		<div class="col-md-10" >
+		</div><div class="row p-2 bg-white border rounded">
+		<div class="col-md-3 mt-1" ><img class="img-fluid img-responsive rounded product-image"   src="${r.urlToImage}"></div>
+	   
+		  <div class="col-md-6 mt-1"> <h5>  ${r.source.name}</h5> 
+		  <div class="mt-1 mb-1 spec-1"><span> ${r.content}</span></div> 
+		  </div>
+		  <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+		  <a href=${r.url} target="_blank"> Read more</a>
+		   	</div>  </div>
+		</div> <br>`
+	  ).join('')
+	   
+
+
+     
+
+}
+
+
+
+    }
+
+
+           </script>
+	</body>
 </html>
